@@ -1,4 +1,4 @@
-# SmartBrain-api
+# SmartBrain
 This project contains the FrontEnd of the Smart Brain App.
 
 What The App Does:

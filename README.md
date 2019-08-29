@@ -1,5 +1,5 @@
 # SmartBrain-api
-This project contains the server of the Smart Brain App.
+This project contains the FrontEnd of the Smart Brain App.
 
 What The App Does:
 - Form with Register and Login

@@ -30,4 +30,6 @@ To run the app:
 2. Run `npm install`
 3. Run `npm start`
 
+To see the project: smart-recognition-brain.herokuapp.com
+
 Have fun!

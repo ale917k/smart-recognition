@@ -1,11 +1,9 @@
-# SmartBrain
-This project contains the FrontEnd of the Smart Brain App.
+# Smart Recognition App
 
 What The App Does:
 - Form with Register and Login
 - Face Recognition made with Machine Learning
 - Keeps track of Users Profile Detections
-
 
 What It Uses:
 - Flexbox
@@ -24,12 +22,15 @@ What Is Implemented:
 - knex.js - "Batteries included" SQL query builder for Relational Databases
 - bcrypt.js - To encrypt sensitive information (such as psw) for a better user experience
 
-To run the app:
+To run the server:
 
 1. Clone this repo
 2. Run `npm install`
 3. Run `npm start`
+4. You must add your own API key in the `controllers/image.js` file to connect to Clarifai API.
+
+You can grab Clarifai API key here: (https://www.clarifai.com/)
 
 To see the project: smart-recognition-brain.herokuapp.com
 
-Have fun!
+** Make sure you use postgreSQL instead of mySQL for this code base.

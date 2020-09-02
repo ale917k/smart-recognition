@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Profile.css";
 
-const Profile = ({ toggleModal, user }) => {
+const Profile = ({ toggleModal, user, loadUser }) => {
+  const [name, setName] = useState(user.name);
+
+  const onFormChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const onProfileUpdate = (data) => {
+    fetch(`http://localhost:5000/profile/${user.id}`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ formInput: data }),
+    })
+      .then((resp) => {
+        toggleModal();
+        loadUser({ ...user, ...data });
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="profile-modal">
       <article className="relative br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center bg-white">
         <main className="pa4 black-80 w-80">
-          <h1>{user.name}</h1>
+          <h1>{name}</h1>
           <h4>{`Image Submitted: ${user.entries}`}</h4>
           <p>{`Member since: ${new Date(user.joined).toLocaleDateString()}`}</p>
           <hr />
@@ -21,12 +40,16 @@ const Profile = ({ toggleModal, user }) => {
             type="text"
             name="user-name"
             id="name"
+            onChange={onFormChange}
           />
           <div
             className="mt4"
             style={{ display: "flex", justifyContent: "space-evenly" }}
           >
-            <button className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20">
+            <button
+              className="b pa2 grow pointer hover-white w-40 bg-light-blue b--black-20"
+              onClick={() => onProfileUpdate({ name })}
+            >
               Save
             </button>
             <button

@@ -50,36 +50,36 @@ class App extends Component {
 
   componentDidMount() {
     const token = window.sessionStorage.getItem("token");
-    if (token) {
-      fetch("http://localhost:5000/signin", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": token, // prettier-ignore
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data && data.id) {
-            fetch(`http://localhost:5000/profile/${data.id}`, {
-              method: "get",
-              headers: {
-                "Content-Type": "application/json",
-                "Authorization": token, // prettier-ignore
-              },
-            })
-              .then((res) => res.json())
-              .then((user) => {
-                if (user && user.email) {
-                  this.loadUser(user);
-                  this.onRouteChange("home");
-                }
-              })
-              .catch((err) => console.log(err));
-          }
-        })
-        .catch((err) => console.log(err));
-    }
+    // if (token) {
+    //   fetch("http://localhost:5000/signin", {
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "Authorization": token, // prettier-ignore
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       if (data && data.id) {
+    //         fetch(`http://localhost:5000/profile/${data.id}`, {
+    //           method: "get",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //             "Authorization": token, // prettier-ignore
+    //           },
+    //         })
+    //           .then((res) => res.json())
+    //           .then((user) => {
+    //             if (user && user.email) {
+    //               this.loadUser(user);
+    //               this.onRouteChange("home");
+    //             }
+    //           })
+    //           .catch((err) => console.log(err));
+    //       }
+    //     })
+    //     .catch((err) => console.log(err));
+    // }
   }
 
   loadUser = (data) => {
@@ -124,38 +124,38 @@ class App extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input });
-    fetch("http://localhost:5000/imageurl", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: window.sessionStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        input: this.state.input,
-      }),
-    })
-      .then((response) => response.json())
-      .then((response) => {
-        if (response) {
-          fetch("http://localhost:5000/image", {
-            method: "put",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: window.sessionStorage.getItem("token"),
-            },
-            body: JSON.stringify({
-              id: this.state.user.id,
-            }),
-          })
-            .then((response) => response.json())
-            .then((count) => {
-              this.setState(Object.assign(this.state.user, { entries: count }));
-            })
-            .catch(console.log);
-        }
-        this.displayFaceBoxes(this.calculateFaceLocations(response));
-      })
-      .catch((err) => console.log(err));
+    // fetch("http://localhost:5000/imageurl", {
+    //   method: "post",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: window.sessionStorage.getItem("token"),
+    //   },
+    //   body: JSON.stringify({
+    //     input: this.state.input,
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((response) => {
+    //     if (response) {
+    //       fetch("http://localhost:5000/image", {
+    //         method: "put",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           Authorization: window.sessionStorage.getItem("token"),
+    //         },
+    //         body: JSON.stringify({
+    //           id: this.state.user.id,
+    //         }),
+    //       })
+    //         .then((response) => response.json())
+    //         .then((count) => {
+    //           this.setState(Object.assign(this.state.user, { entries: count }));
+    //         })
+    //         .catch(console.log);
+    //     }
+    //     this.displayFaceBoxes(this.calculateFaceLocations(response));
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   onRouteChange = (route) => {

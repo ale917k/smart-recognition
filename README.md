@@ -1,36 +1,44 @@
 # Smart Recognition App
 
-What The App Does:
-- Form with Register and Login
-- Face Recognition made with Machine Learning
-- Keeps track of Users Profile Detections
+Smart Recognition App is a simple React App for face detection.
 
-What It Uses:
+## What It Uses:
+
 - Flexbox
 - React
 - Node.js / Express.js using RESTful API
 - JSON
 - AJAX
 - Relational Database built with PostgreSQL
+- Redis as in-memory store db (used for sessions)
+- Docker-compose for handling all backend services
 
-What Is Implemented:
-- tachyons - framework for fast loading and fully responsive CSS
-- Clarifai API - Face Recognition API (AI company)
-- particles.js - Library for background animation
-- body-parser.js - Node.js body parsing middleware
-- cors.js - Configures the Access-Control-Allow-Origin to make a safe communication FrontEnd - Server
-- knex.js - "Batteries included" SQL query builder for Relational Databases
-- bcrypt.js - To encrypt sensitive information (such as psw) for a better user experience
+## Installation
 
-To run the server:
+Make sure to have [git](https://git-scm.com/downloads), [node](https://nodejs.org/en/) and [docker](https://www.docker.com/products/docker-desktop) installed, then run:
 
-1. Clone this repo
-2. Run `npm install`
-3. Run `npm start`
-4. You must add your own API key in the `controllers/image.js` file to connect to Clarifai API.
+```bash
+git clone https://github.com/ale917k/smart-recognition
+cd ./smart-recognition
+npm install
+```
 
-You can grab Clarifai API key here: (https://www.clarifai.com/)
+Add an `.env` file which looks as follow:
 
-To see the project: smart-recognition-brain.herokuapp.com
+```
+# Server
+JWT_PSW=secret
+CLARIFAI_API_KEY=<clarifai-api-key> # You can grab Clarifai API key here: (https://www.clarifai.com/)
 
-** Make sure you use postgreSQL instead of mySQL for this code base.
+# Postgres
+POSTGRES_URI=postgres://postgres:secret@postgres:5432/smart-recognition-docker
+
+# Redis
+REDIS_URI=redis://redis:6379
+```
+
+You can then run `npm start`; That will boot up all services (client, server, postgres, redis) concurrently.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)

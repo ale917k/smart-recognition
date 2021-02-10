@@ -11,7 +11,10 @@ const Navigation = ({ onRouteChange, isSignedIn, toggleModal }) => {
           Profile
         </p>
         <p
-          onClick={() => onRouteChange("signout")}
+          onClick={() => {
+            window.sessionStorage.removeItem("token");
+            onRouteChange("signout");
+          }}
           className="f3 link dim black underline pa3 pointer"
         >
           Sign Out

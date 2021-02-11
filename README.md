@@ -31,10 +31,17 @@ JWT_PSW=secret
 CLARIFAI_API_KEY=<clarifai-api-key> # You can grab Clarifai API key here: (https://www.clarifai.com/)
 
 # Postgres
-POSTGRES_URI=postgres://postgres:secret@postgres:5432/smart-recognition-docker
+POSTGRES_DEV_URI=postgres://postgres:secret@postgres:5432/smartRecognitionDB
+POSTGRES_PRD_URI=postgres://postgres:secret@localhost:5432/smartRecognitionDB
+
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=secret
+POSTGRES_DB=smartRecognitionDB
+POSTGRES_HOST=postgres
 
 # Redis
-REDIS_URI=redis://redis:6379
+REDIS_DEV_URI=redis://redis:6379
+REDIS_PRD_URI=redis://localhost:6379
 ```
 
 You can then run `npm start`; That will boot up all services (client, server, postgres, redis) concurrently.

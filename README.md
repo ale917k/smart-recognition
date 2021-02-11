@@ -2,6 +2,8 @@
 
 Smart Recognition is a simple React App for face detection.
 
+[Open Live Project](http://3.8.183.21)
+
 ## What It Uses:
 
 - Flexbox

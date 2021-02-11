@@ -37,10 +37,24 @@ class Register extends React.Component {
       }),
     })
       .then((response) => response.json())
-      .then((user) => {
-        if (user.id) {
-          this.props.loadUser(user);
-          this.props.onRouteChange("home");
+      .then((data) => {
+        if (data.userId && data.success === "true") {
+          this.saveAuthTokenInSession(data.token);
+          fetch(`/api/profile/${data.userId}`, {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: data.token,
+            },
+          })
+            .then((res) => res.json())
+            .then((user) => {
+              if (user && user.email) {
+                this.props.loadUser(user);
+                this.props.onRouteChange("home");
+              }
+            })
+            .catch((err) => console.log(err));
         }
       })
       .catch((err) => console.log("unable to register, ref: " + err));

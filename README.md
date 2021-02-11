@@ -1,6 +1,6 @@
-# Smart Recognition App
+# Smart Recognition
 
-Smart Recognition App is a simple React App for face detection.
+Smart Recognition is a simple React App for face detection.
 
 ## What It Uses:
 

@@ -1,37 +1,57 @@
-version: "3.8"
+version: "3.0"
 
 services:
-  # Backend API
+  # React Client
+  web:
+    image: 163575307513.dkr.ecr.eu-west-2.amazonaws.com/smart-recognition-client
+    ports:
+      - "80:80"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: smart-recognition
+        awslogs-region: eu-west-2
+        awslogs-stream-prefix: web
+
+  # Node Server
   node:
-    container_name: node
-    build: ./server/
+    image: 163575307513.dkr.ecr.eu-west-2.amazonaws.com/smart-recognition-server
     command: npm start
-    working_dir: /app/server/
     env_file: .env
     environment:
-      NODE_ENV: development
-      POSTGRES_URI: $POSTGRES_URI
-      REDIS_URI: $REDIS_URI
+      NODE_ENV: production
+      POSTGRES_URI: $POSTGRES_PRD_URI
+      REDIS_URI: $REDIS_PRD_URI
     ports:
       - "8080:8080"
-    volumes:
-      - ./server/:/app/server/
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: smart-recognition
+        awslogs-region: eu-west-2
+        awslogs-stream-prefix: node
 
-  # Postgres
+  # MongoDB
   postgres:
-    container_name: postgres
-    environment:
-      POSTGRES_USER: $POSTGRES_USER
-      POSTGRES_PASSWORD: $POSTGRES_PASSWORD
-      POSTGRES_DB: $POSTGRES_DB
-      POSTGRES_HOST: $POSTGRES_HOST
-    build: ./server/postgres
+    image: 163575307513.dkr.ecr.eu-west-2.amazonaws.com/smart-recognition-postgres
+    env_file: .env
     ports:
-      - "5431:5432"
+      - "5432:5432"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: smart-recognition
+        awslogs-region: eu-west-2
+        awslogs-stream-prefix: postgres
 
   #Redis
   redis:
-    container_name: redis
     image: redis
     ports:
       - "6379:6379"
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: smart-recognition
+        awslogs-region: eu-west-2
+        awslogs-stream-prefix: redis

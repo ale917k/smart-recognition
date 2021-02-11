@@ -50,8 +50,7 @@ class App extends Component {
 
   componentDidMount() {
     const token = window.sessionStorage.getItem("token");
-    console.log("we here");
-    console.log(token);
+
     if (token) {
       fetch("/api/signin", {
         method: "post",
@@ -62,7 +61,6 @@ class App extends Component {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data && data.id) {
             fetch(`/api/profile/${data.id}`, {
               method: "get",
@@ -73,7 +71,6 @@ class App extends Component {
             })
               .then((res) => res.json())
               .then((user) => {
-                console.log("user", user);
                 if (user && user.email) {
                   this.loadUser(user);
                   this.onRouteChange("home");

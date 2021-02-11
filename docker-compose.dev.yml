@@ -10,8 +10,8 @@ services:
     env_file: .env
     environment:
       NODE_ENV: development
-      POSTGRES_URI: $POSTGRES_URI
-      REDIS_URI: $REDIS_URI
+      POSTGRES_URI: $POSTGRES_DEV_URI
+      REDIS_URI: $REDIS_DEV_URI
     ports:
       - "8080:8080"
     volumes:

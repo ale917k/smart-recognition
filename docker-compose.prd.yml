@@ -3,7 +3,7 @@ version: "3.0"
 services:
   # React Client
   web:
-    image: 163575307513.dkr.ecr.eu-west-2.amazonaws.com/smart-recognition-client
+    image: 163575307513.dkr.ecr.eu-west-2.amazonaws.com/smart-recognition-client:latest
     ports:
       - "80:80"
     logging:
@@ -15,7 +15,7 @@ services:
 
   # Node Server
   node:
-    image: 163575307513.dkr.ecr.eu-west-2.amazonaws.com/smart-recognition-server
+    image: 163575307513.dkr.ecr.eu-west-2.amazonaws.com/smart-recognition-server:latest
     command: npm start
     env_file: .env
     environment:

@@ -2,7 +2,7 @@
 
 Smart Recognition is a simple React App for face detection.
 
-[Open Live Project](http://35.177.80.215)
+[Open Live Project](https://www.smartrecognition.space/)
 
 ## What It Uses:
 
